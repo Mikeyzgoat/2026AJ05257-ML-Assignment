@@ -29,19 +29,25 @@ uv pip install --python .venv/bin/python -r requirements.txt
 
 ## Model comparison
 
-The table below will be filled after the models are trained and evaluated on the fixed stratified test set.
+The models were evaluated on the same 20% stratified test split, created with `random_state=42`.
 
 | Model | Accuracy | AUC | Precision | Recall | F1-score | MCC |
 |---|---:|---:|---:|---:|---:|---:|
-| Logistic Regression | Pending | Pending | Pending | Pending | Pending | Pending |
-| Decision Tree | Pending | Pending | Pending | Pending | Pending | Pending |
-| KNN | Pending | Pending | Pending | Pending | Pending | Pending |
-| Naive Bayes | Pending | Pending | Pending | Pending | Pending | Pending |
-| SVM | Pending | Pending | Pending | Pending | Pending | Pending |
+| Logistic Regression | 0.928087 | 0.978503 | 0.934392 | 0.901020 | 0.917403 | 0.854206 |
+| Decision Tree | 0.969697 | 0.976431 | 0.976017 | 0.955102 | 0.965446 | 0.938643 |
+| KNN | 0.947987 | 0.985727 | 0.950052 | 0.931633 | 0.940752 | 0.894544 |
+| Naive Bayes | 0.616011 | 0.967709 | 0.535851 | 0.998980 | 0.697542 | 0.406650 |
+| SVM | 0.956128 | 0.989042 | 0.963274 | 0.936735 | 0.949819 | 0.911141 |
 
 ## Observations
 
-Observations for each model and the overall winner will be added from the measured test-set results after training.
+- Logistic Regression gives a balanced baseline, with 0.928087 accuracy and 0.917403 F1-score.
+- Decision Tree has the best accuracy, precision, recall, F1-score, and MCC in this comparison.
+- KNN performs well overall and has the second-highest AUC at 0.985727.
+- Naive Bayes has very high recall but low precision, which leads to many false positives and the lowest overall scores.
+- SVM has the best AUC at 0.989042 and strong results across the remaining metrics.
+
+Overall winner: Decision Tree, because it leads on five of the six reported metrics. SVM is the strongest model when ranking by AUC.
 
 ## Streamlit application
 
@@ -55,4 +61,3 @@ Live app link: To be added after deployment.
 - Live Streamlit app link: to be added after deployment.
 - BITS Virtual Lab execution screenshot: must be captured by the student.
 - Final PDF: must contain the links, genuine screenshot, and this README content.
-

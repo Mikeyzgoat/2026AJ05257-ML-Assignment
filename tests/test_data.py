@@ -8,7 +8,6 @@ def test_feature_list_meets_assignment_requirement():
 
 
 def test_dataset_validation_accepts_expected_schema():
-    frame = pd.DataFrame({column: [1, -1] for column in FEATURE_COLUMNS})
-    frame["Result"] = [-1, 1]
+    frame = pd.DataFrame({column: [1, -1] * 250 for column in FEATURE_COLUMNS})
+    frame["Result"] = ([-1, 1] * 250)
     validate_dataset(frame)
-
