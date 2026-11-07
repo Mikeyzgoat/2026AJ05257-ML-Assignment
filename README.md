@@ -51,7 +51,7 @@ Overall winner: Decision Tree, because it leads on five of the six reported metr
 
 ## Streamlit application
 
-The app has a home page and one separate page for each model. Each model page fetches UCI dataset 327 with `ucimlrepo`, loads its saved model from `model/`, and displays six metrics, a confusion matrix, a classification report, and a short analysis. It does not retrain models.
+The app has a Home Page and one separate page for each model. The Home Page shows the feature list, class balance, correlation heatmap, and test-set comparison. Each model page shows the one-function training code, fetches UCI dataset 327 with `ucimlrepo` by default, or accepts the required labeled test CSV, then displays six metrics, a confusion matrix, a classification report, and a short analysis. It does not retrain models.
 
 Live app link: To be added after deployment.
 

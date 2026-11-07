@@ -2,9 +2,10 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
-.streamlit/
+.streamlit/secrets.toml
 .DS_Store
-codex_implementation_plan.md
+*.pdf
+*_implementation_plan.md
 .agents/
 .codex/
 .claude/

@@ -1,28 +1,15 @@
-"""Home page for the Streamlit multipage application."""
+"""Streamlit entry point and page navigation."""
 
-import pandas as pd
 import streamlit as st
 
 st.set_page_config(page_title="Phishing Website Classifier", layout="wide")
-st.title("Phishing Website Classification")
-st.write("Use the page menu to open one model at a time.")
 
-st.subheader("How to use the app")
-st.write("1. Open a model page from the menu.")
-st.write("2. Wait for the UCI dataset to load.")
-st.write("3. Review the metrics, confusion matrix, and short analysis.")
-
-st.subheader("Available models")
-st.dataframe(
-    pd.DataFrame(
-        {
-            "Model": ["Logistic Regression", "Decision Tree", "KNN", "Naive Bayes", "SVM"],
-            "Purpose": ["Linear baseline", "Rule-based decisions", "Nearest examples", "Probability-based baseline", "Strong boundary model"],
-        }
-    ),
-    hide_index=True,
-    use_container_width=True,
-)
-
-st.info("The app loads saved models and evaluates them on UCI dataset 327.")
-st.caption("2026AJ05257")
+pages = [
+    st.Page("src/home_page.py", title="Home Page"),
+    st.Page("pages/1_Logistic_Regression.py", title="Logistic Regression"),
+    st.Page("pages/2_Decision_Tree.py", title="Decision Tree"),
+    st.Page("pages/3_KNN.py", title="KNN"),
+    st.Page("pages/4_Naive_Bayes.py", title="Naive Bayes"),
+    st.Page("pages/5_SVM.py", title="SVM"),
+]
+st.navigation(pages).run()

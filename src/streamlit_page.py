@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 from sklearn.metrics import classification_report
 
-from src.app_utils import load_uci_data
+from src.app_utils import load_uci_data, validate_upload
 from src.data_validation import FEATURE_COLUMNS
 from src.evaluation import evaluate_model
 from src.models import MODEL_FILES
@@ -20,12 +20,59 @@ ANALYSIS = {
     "SVM": "This model finds a strong separating boundary. It gives the best AUC, so its ranking of cases is very good.",
 }
 
+ALGORITHM_CODE = {
+    "Logistic Regression": '''def train_logistic_regression(X_train, y_train):
+    model = Pipeline([
+        ("scale", StandardScaler()),
+        ("model", LogisticRegression(max_iter=2000))
+    ])
+    model.fit(X_train, y_train)
+    return model''',
+    "Decision Tree": '''def train_decision_tree(X_train, y_train):
+    model = DecisionTreeClassifier(random_state=42)
+    model.fit(X_train, y_train)
+    return model''',
+    "KNN": '''def train_knn(X_train, y_train):
+    model = Pipeline([
+        ("scale", StandardScaler()),
+        ("model", KNeighborsClassifier(n_neighbors=5))
+    ])
+    model.fit(X_train, y_train)
+    return model''',
+    "Naive Bayes": '''def train_naive_bayes(X_train, y_train):
+    model = GaussianNB()
+    model.fit(X_train, y_train)
+    return model''',
+    "SVM": '''def train_svm(X_train, y_train):
+    model = Pipeline([
+        ("scale", StandardScaler()),
+        ("model", SVC(probability=True, random_state=42))
+    ])
+    model.fit(X_train, y_train)
+    return model''',
+}
+
 
 def render_model_page(model_name: str) -> None:
     st.title(model_name)
-    st.write("This page uses the UCI Phishing Websites dataset directly.")
+    st.subheader("Code used")
+    st.code(ALGORITHM_CODE[model_name], language="python")
+
+    st.write("The default data source is the UCI dataset. You can also upload the test CSV required by the assignment.")
+    source = st.radio("Data source", ["UCI dataset", "Upload test CSV"], horizontal=True)
     try:
-        data = load_uci_data()
+        if source == "UCI dataset":
+            data = load_uci_data()
+        else:
+            uploaded = st.file_uploader("Upload labeled test CSV", type="csv", key=f"upload_{model_name}")
+            if uploaded is None:
+                st.info("Upload a CSV with all 30 features and the result column.")
+                st.caption("2026AJ05257")
+                return
+            data = pd.read_csv(uploaded)
+            data.columns = data.columns.str.lower()
+            validate_upload(data)
+
         model = joblib.load(Path("model") / MODEL_FILES[model_name])
         X = data[FEATURE_COLUMNS]
         y = data["result"]
