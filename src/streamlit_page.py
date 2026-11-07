@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 from sklearn.metrics import classification_report
 
-from src.app_utils import load_uci_data, validate_upload
+from src.app_utils import load_uci_data
 from src.data_validation import FEATURE_COLUMNS
 from src.evaluation import evaluate_model
 from src.models import MODEL_FILES
@@ -57,22 +57,9 @@ def render_model_page(model_name: str) -> None:
     st.title(model_name)
     st.subheader("Code used")
     st.code(ALGORITHM_CODE[model_name], language="python")
-
-    st.write("The default data source is the UCI dataset. You can also upload the test CSV required by the assignment.")
-    source = st.radio("Data source", ["UCI dataset", "Upload test CSV"], horizontal=True)
+    st.write("This page uses the UCI Phishing Websites dataset directly.")
     try:
-        if source == "UCI dataset":
-            data = load_uci_data()
-        else:
-            uploaded = st.file_uploader("Upload labeled test CSV", type="csv", key=f"upload_{model_name}")
-            if uploaded is None:
-                st.info("Upload a CSV with all 30 features and the result column.")
-                st.caption("2026AJ05257")
-                return
-            data = pd.read_csv(uploaded)
-            data.columns = data.columns.str.lower()
-            validate_upload(data)
-
+        data = load_uci_data()
         model = joblib.load(Path("model") / MODEL_FILES[model_name])
         X = data[FEATURE_COLUMNS]
         y = data["result"]
