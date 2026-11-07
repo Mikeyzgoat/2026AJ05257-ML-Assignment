@@ -1,0 +1,19 @@
+[project]
+name = "phishing-website-classification"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas",
+  "numpy",
+  "scikit-learn",
+  "matplotlib",
+  "seaborn",
+  "joblib",
+  "ucimlrepo",
+  "streamlit",
+  "pytest",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
