@@ -9,7 +9,7 @@ st.write("Use the page menu to open one model at a time.")
 
 st.subheader("How to use the app")
 st.write("1. Open a model page from the menu.")
-st.write("2. Upload a labeled CSV with the 30 features and a result column.")
+st.write("2. Wait for the UCI dataset to load.")
 st.write("3. Review the metrics, confusion matrix, and short analysis.")
 
 st.subheader("Available models")
@@ -24,5 +24,5 @@ st.dataframe(
     use_container_width=True,
 )
 
-st.info("The app loads saved models. It does not train models on uploaded files.")
+st.info("The app loads saved models and evaluates them on UCI dataset 327.")
 st.caption("2026AJ05257")

@@ -7,7 +7,7 @@ import pandas as pd
 import streamlit as st
 from sklearn.metrics import classification_report
 
-from src.app_utils import validate_upload
+from src.app_utils import load_uci_data
 from src.data_validation import FEATURE_COLUMNS
 from src.evaluation import evaluate_model
 from src.models import MODEL_FILES
@@ -23,18 +23,9 @@ ANALYSIS = {
 
 def render_model_page(model_name: str) -> None:
     st.title(model_name)
-    st.write("Upload a labeled CSV to test this saved model.")
-
-    uploaded = st.file_uploader("Upload CSV", type="csv", key=f"upload_{model_name}")
-    if uploaded is None:
-        st.info("The CSV must contain all 30 features and the result column.")
-        st.caption("2026AJ05257")
-        return
-
-    data = pd.read_csv(uploaded)
-    data.columns = data.columns.str.lower()
+    st.write("This page uses the UCI Phishing Websites dataset directly.")
     try:
-        validate_upload(data)
+        data = load_uci_data()
         model = joblib.load(Path("model") / MODEL_FILES[model_name])
         X = data[FEATURE_COLUMNS]
         y = data["result"]
