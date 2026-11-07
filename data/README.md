@@ -8,5 +8,4 @@ The download command is:
 python -m src.data_validation
 ```
 
-The saved raw copy is `data/raw/phishing_dataset.csv`. The target is mapped for modeling as `-1` phishing to `1` and `+1` legitimate to `0`.
-
+The saved dataset copy is `datasets/phishing_dataset.csv`. The target is mapped for modeling as `-1` phishing to `1` and `+1` legitimate to `0`.

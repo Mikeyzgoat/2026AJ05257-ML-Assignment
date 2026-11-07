@@ -15,7 +15,7 @@ def map_target(target: pd.Series) -> pd.Series:
     return mapped.astype(int)
 
 
-def prepare_data(raw_path: str | Path = "data/raw/phishing_dataset.csv", test_path: str | Path = "test_data.csv"):
+def prepare_data(raw_path: str | Path = "datasets/phishing_dataset.csv", test_path: str | Path = "test_data.csv"):
     frame = pd.read_csv(raw_path)
     frame.columns = [str(column).strip().lower() for column in frame.columns]
     target_column = "result"
@@ -33,4 +33,3 @@ def prepare_data(raw_path: str | Path = "data/raw/phishing_dataset.csv", test_pa
 if __name__ == "__main__":
     prepare_data()
     print("Created stratified test_data.csv")
-

@@ -7,7 +7,7 @@ import pandas as pd
 import seaborn as sns
 
 
-def create_plots(path="data/raw/phishing_dataset.csv"):
+def create_plots(path="datasets/phishing_dataset.csv"):
     data = pd.read_csv(path)
     Path("assets").mkdir(exist_ok=True)
     sns.set_theme(style="whitegrid")
@@ -27,4 +27,3 @@ def create_plots(path="data/raw/phishing_dataset.csv"):
 
 if __name__ == "__main__":
     create_plots()
-

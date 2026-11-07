@@ -16,7 +16,7 @@ FEATURE_COLUMNS = [
 ]
 
 
-def download_dataset(output_path: str | Path = "data/raw/phishing_dataset.csv") -> pd.DataFrame:
+def download_dataset(output_path: str | Path = "datasets/phishing_dataset.csv") -> pd.DataFrame:
     dataset = fetch_ucirepo(id=327)
     features = dataset.data.features.copy()
     targets = dataset.data.targets.copy()
@@ -44,4 +44,3 @@ def validate_dataset(frame: pd.DataFrame) -> None:
 if __name__ == "__main__":
     data = download_dataset()
     print(f"Saved {len(data)} rows and {len(FEATURE_COLUMNS)} features")
-

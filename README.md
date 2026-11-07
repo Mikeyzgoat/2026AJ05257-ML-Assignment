@@ -8,7 +8,7 @@ The task is to classify a website as phishing or legitimate from URL and webpage
 
 ## Dataset description
 
-The dataset is UCI dataset 327, Phishing Websites: <https://archive.ics.uci.edu/dataset/327/phishing>. It contains 11,055 instances, 30 integer input features, and the original labels `-1` and `+1`. In this project, `-1` is mapped to phishing (`1`) and `+1` is mapped to legitimate (`0`). The data is downloaded programmatically with `ucimlrepo` and saved under `data/raw/`.
+The dataset is UCI dataset 327, Phishing Websites: <https://archive.ics.uci.edu/dataset/327/phishing>. It contains 11,055 instances, 30 integer input features, and the original labels `-1` and `+1`. In this project, `-1` is mapped to phishing (`1`) and `+1` is mapped to legitimate (`0`). The data is downloaded programmatically with `ucimlrepo` and saved under `datasets/`.
 
 ## GitHub repository
 
