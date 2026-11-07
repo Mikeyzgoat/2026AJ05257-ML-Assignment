@@ -5,11 +5,13 @@ from pathlib import Path
 import joblib
 import pandas as pd
 import streamlit as st
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, f1_score
+from sklearn.model_selection import train_test_split
 
 from src.data_validation import FEATURE_COLUMNS
 from src.evaluation import evaluate_model
 from src.models import MODEL_FILES
+from src.preprocessing import map_target
 
 ANALYSIS = {
     "Logistic Regression": "This is a simple linear baseline. It gives balanced results, but it may miss complex patterns.",
@@ -68,6 +70,19 @@ def train_svm(X_train, y_train):
 }
 
 
+@st.cache_data(show_spinner=False)
+def load_training_split() -> tuple[pd.DataFrame, pd.Series]:
+    """Recreate the same training split used to fit the saved models."""
+    training_data = pd.read_csv("datasets/phishing_dataset.csv")
+    training_data.columns = [str(column).strip().lower() for column in training_data.columns]
+    features = training_data[FEATURE_COLUMNS].apply(pd.to_numeric)
+    target = map_target(training_data["result"])
+    X_train, _, y_train, _ = train_test_split(
+        features, target, test_size=0.2, random_state=42, stratify=target
+    )
+    return X_train, y_train
+
+
 def render_model_page(model_name: str) -> None:
     st.title(model_name)
     st.markdown(
@@ -119,24 +134,23 @@ def render_model_page(model_name: str) -> None:
 
         predict_clicked = st.button("Predict", type="primary")
         if not predict_clicked:
-            st.info("Click Predict to run all five saved models on this test data.")
+            st.info(f"Click Predict to run {model_name} on this test data.")
             return
 
         X = test_data[FEATURE_COLUMNS]
         y = test_data["result"].astype(int)
 
-        st.subheader("Results for all models")
-        all_results = []
-        for name, filename in MODEL_FILES.items():
-            saved_model = joblib.load(Path("model") / filename)
-            all_results.append({"Model": name, **evaluate_model(saved_model, X, y)})
-        st.dataframe(pd.DataFrame(all_results).round(4), hide_index=True, use_container_width=True)
-
         model = joblib.load(Path("model") / MODEL_FILES[model_name])
         predictions = model.predict(X)
         metrics = evaluate_model(model, X, y)
+        training_features, training_target = load_training_split()
+        metrics["F1-score (training)"] = f1_score(
+            training_target,
+            model.predict(training_features),
+            zero_division=0,
+        )
 
-        st.subheader(f"{model_name} details")
+        st.subheader(f"Prediction results: {model_name}")
         st.write("Metrics")
         st.dataframe(pd.DataFrame([metrics]).round(4), hide_index=True, use_container_width=True)
 
@@ -146,6 +160,7 @@ def render_model_page(model_name: str) -> None:
 
         st.subheader("Analysis")
         st.write(ANALYSIS[model_name])
+        st.caption("* F1-score shown above is from the training dataset used to fit the saved model. The uploaded CSV is used for prediction and the remaining displayed metrics.")
 
         st.subheader("Classification report")
         st.code(classification_report(y, predictions, target_names=["legitimate", "phishing"], zero_division=0))
