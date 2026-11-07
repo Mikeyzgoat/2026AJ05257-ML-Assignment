@@ -129,8 +129,9 @@ def render_model_page(model_name: str) -> None:
             raise ValueError("The result column must contain only 0/1 or -1/+1 labels.")
 
         st.caption(f"Using {'uploaded' if uploaded_file else 'repository'} CSV: {len(test_data):,} rows")
-        st.write("First 10 rows loaded with `pd.read_csv(...).head(10)`:")
-        st.dataframe(test_data.head(10), hide_index=True, use_container_width=True)
+        if uploaded_file is not None:
+            st.write("First 10 uploaded rows loaded with `pd.read_csv(...).head(10)`:")
+            st.dataframe(test_data.head(10), hide_index=True, use_container_width=True)
 
         predict_clicked = st.button("Predict", type="primary")
         if not predict_clicked:
