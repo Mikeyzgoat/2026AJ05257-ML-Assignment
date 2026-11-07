@@ -10,8 +10,20 @@ from src.data_validation import FEATURE_COLUMNS
 
 st.title("Phishing Website Classification")
 st.write("This page shows the dataset and a short exploratory analysis.")
-st.markdown("[Download the dataset CSV from the GitHub datasets folder](https://github.com/Mikeyzgoat/2026AJ05257-ML-Assignment/blob/main/datasets/phishing_dataset.csv)")
-st.markdown("[Open the GitHub repository](https://github.com/Mikeyzgoat/2026AJ05257-ML-Assignment)")
+st.link_button("Open the GitHub repository", "https://github.com/Mikeyzgoat/2026AJ05257-ML-Assignment")
+
+st.subheader("Dataset downloads")
+download_github, download_uci = st.columns(2)
+with download_github:
+    st.link_button(
+        "Download from GitHub",
+        "https://raw.githubusercontent.com/Mikeyzgoat/2026AJ05257-ML-Assignment/main/datasets/phishing_dataset.csv",
+    )
+with download_uci:
+    st.link_button(
+        "Download from UCI",
+        "https://archive.ics.uci.edu/dataset/327/phishing",
+    )
 
 data = load_uci_data()
 

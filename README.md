@@ -16,6 +16,11 @@ Repository: [2026AJ05257-ML-Assignment](https://github.com/Mikeyzgoat/2026AJ0525
 
 Dataset CSV: [datasets/phishing_dataset.csv](https://github.com/Mikeyzgoat/2026AJ05257-ML-Assignment/blob/main/datasets/phishing_dataset.csv)
 
+Dataset downloads:
+
+- [Download the CSV from GitHub](https://raw.githubusercontent.com/Mikeyzgoat/2026AJ05257-ML-Assignment/main/datasets/phishing_dataset.csv)
+- [Open the UCI dataset download page](https://archive.ics.uci.edu/dataset/327/phishing)
+
 ## Live Streamlit App Link
 
 [Open the deployed Streamlit application](https://2026aj05257-ml-assignment-submission.streamlit.app/)
@@ -29,7 +34,6 @@ uv pip install --python .venv/bin/python -r requirements.txt
 .venv/bin/python -m src.eda
 .venv/bin/python -m src.train_models
 .venv/bin/python -m src.evaluation
-.venv/bin/pytest
 .venv/bin/streamlit run app.py
 ```
 
@@ -39,7 +43,7 @@ The five models are Logistic Regression, Decision Tree Classifier, K-Nearest Nei
 
 ### Model comparison
 
-The models were evaluated on the same 20% stratified test split, created with `random_state=42`.
+The models were evaluated on the same 20% stratified test split, created with `random_state=42`. The evaluation outputs are saved under `results/`.
 
 | Model | Accuracy | AUC | Precision | Recall | F1-score | MCC |
 |---|---:|---:|---:|---:|---:|---:|
@@ -65,7 +69,7 @@ Decision Tree is the overall winner because it leads on five of the six reported
 
 ## Streamlit application
 
-The app has a Home Page and one separate page for each model. The Home Page shows the feature list, class balance, correlation heatmap, and test-set comparison. Each model page shows the one-function training code, fetches UCI dataset 327 with `ucimlrepo` by default, optionally accepts the labeled `test_data.csv`, and displays six metrics, a confusion matrix, a classification report, and a short analysis. It does not retrain models.
+The app has a Home Page and one separate page for each model. The Home Page shows the feature list, class balance, correlation heatmap, and test-set comparison. Each model page shows the one-function training code, fetches UCI dataset 327 with `ucimlrepo` by default, optionally accepts a labeled CSV, and displays six metrics, a confusion matrix, a classification report, and a short analysis. It does not retrain models.
 
 Live app link: [2026aj05257-ml-assignment-submission.streamlit.app](https://2026aj05257-ml-assignment-submission.streamlit.app/)
 
