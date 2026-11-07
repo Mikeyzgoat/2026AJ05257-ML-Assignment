@@ -1,16 +1,24 @@
-.venv/
+# Python bytecode and caches
 __pycache__/
 *.py[cod]
-.pytest_cache/
-.streamlit/secrets.toml
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS and IDE files
 .DS_Store
-*.pdf
-*_implementation_plan.md
-.agents/
-.codex/
-.claude/
-.cursor/
-AGENTS.md
-CLAUDE.md
-CODEX.md
-SKILLS.md
+Thumbs.db
+.vscode/
+.idea/
+
+# Local assignment brief PDF (keep out of repo)
+ML_Assignment_2_AIML_26Oct26.pdf
