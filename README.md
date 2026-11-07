@@ -69,7 +69,7 @@ Decision Tree is the overall winner because it leads on five of the six reported
 
 ## Streamlit application
 
-The app has two pages: a Home Page with the feature list, class balance, correlation heatmap, and test-set comparison; and a Model Selection page with the model dropdown, one-function training code with imports, six metrics, a confusion matrix, a classification report, and a short analysis. The Home Page links directly to Model Selection. The app fetches UCI dataset 327 with `ucimlrepo` by default and can optionally accept a labeled CSV. It does not retrain models.
+The app has two pages: a Home Page with the feature list, class balance, correlation heatmap, and test-set comparison; and a Model Selection page with the model dropdown, one-function training code with imports, six metrics, a confusion matrix, a classification report, and a short analysis. The Home Page links directly to Model Selection. The app fetches UCI dataset 327 with `ucimlrepo` and does not retrain models.
 
 Live app link: [2026aj05257-ml-assignment-submission.streamlit.app](https://2026aj05257-ml-assignment-submission.streamlit.app/)
 
