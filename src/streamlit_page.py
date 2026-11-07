@@ -21,29 +21,45 @@ ANALYSIS = {
 }
 
 ALGORITHM_CODE = {
-    "Logistic Regression": '''def train_logistic_regression(X_train, y_train):
+    "Logistic Regression": '''from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+def train_logistic_regression(X_train, y_train):
     model = Pipeline([
         ("scale", StandardScaler()),
         ("model", LogisticRegression(max_iter=2000))
     ])
     model.fit(X_train, y_train)
     return model''',
-    "Decision Tree": '''def train_decision_tree(X_train, y_train):
+    "Decision Tree": '''from sklearn.tree import DecisionTreeClassifier
+
+def train_decision_tree(X_train, y_train):
     model = DecisionTreeClassifier(random_state=42)
     model.fit(X_train, y_train)
     return model''',
-    "KNN": '''def train_knn(X_train, y_train):
+    "KNN": '''from sklearn.neighbors import KNeighborsClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+def train_knn(X_train, y_train):
     model = Pipeline([
         ("scale", StandardScaler()),
         ("model", KNeighborsClassifier(n_neighbors=5))
     ])
     model.fit(X_train, y_train)
     return model''',
-    "Naive Bayes": '''def train_naive_bayes(X_train, y_train):
+    "Naive Bayes": '''from sklearn.naive_bayes import GaussianNB
+
+def train_naive_bayes(X_train, y_train):
     model = GaussianNB()
     model.fit(X_train, y_train)
     return model''',
-    "SVM": '''def train_svm(X_train, y_train):
+    "SVM": '''from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+
+def train_svm(X_train, y_train):
     model = Pipeline([
         ("scale", StandardScaler()),
         ("model", SVC(probability=True, random_state=42))
