@@ -16,6 +16,8 @@ Repository: [2026AJ05257-ML-Assignment](https://github.com/Mikeyzgoat/2026AJ0525
 
 Dataset CSV: [datasets/phishing_dataset.csv](https://github.com/Mikeyzgoat/2026AJ05257-ML-Assignment/blob/main/datasets/phishing_dataset.csv)
 
+Test data used by the saved models: [test_data.csv](https://github.com/Mikeyzgoat/2026AJ05257-ML-Assignment/blob/main/test_data.csv)
+
 Dataset downloads:
 
 - [Download the CSV from GitHub](https://raw.githubusercontent.com/Mikeyzgoat/2026AJ05257-ML-Assignment/main/datasets/phishing_dataset.csv)
@@ -69,7 +71,7 @@ Decision Tree is the overall winner because it leads on five of the six reported
 
 ## Streamlit application
 
-The app has two pages: a Home Page with the feature list, class balance, correlation heatmap, and test-set comparison; and a Model Selection page with the model dropdown, one-function training code with imports, six metrics, a confusion matrix, a classification report, and a short analysis. The Home Page links directly to Model Selection. The app fetches UCI dataset 327 with `ucimlrepo` and does not retrain models.
+The app has two pages: a Home Page with the feature list, class balance, correlation heatmap, and test-set comparison; and a Model Selection page with the model dropdown, CSV upload option, first 10 uploaded rows, results for all five saved models, six metrics, a confusion matrix, a classification report, and a short analysis. The uploaded CSV must contain all 30 feature columns and the `result` target column. The app loads the saved models and does not retrain them on uploaded data.
 
 Live app link: [2026aj05257-ml-assignment-submission.streamlit.app](https://2026aj05257-ml-assignment-submission.streamlit.app/)
 
