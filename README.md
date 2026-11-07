@@ -51,7 +51,7 @@ Overall winner: Decision Tree, because it leads on five of the six reported metr
 
 ## Streamlit application
 
-The app loads saved models from `model/`, accepts a labeled CSV with all 30 features and `result`, and displays the selected model's six metrics, confusion matrix, and classification report. It does not retrain models or fit preprocessing on uploaded data.
+The app has a home page and one separate page for each model. Each model page loads its saved model from `model/`, accepts a labeled CSV with all 30 features and `result`, and displays six metrics, a confusion matrix, a classification report, and a short analysis. It does not retrain models or fit preprocessing on uploaded data.
 
 Live app link: To be added after deployment.
 
