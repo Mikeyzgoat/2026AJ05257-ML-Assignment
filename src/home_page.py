@@ -9,6 +9,23 @@ from src.app_utils import load_uci_data
 from src.data_validation import FEATURE_COLUMNS
 
 st.title("Phishing Website Classification")
+st.markdown(
+    """
+    <style>
+    div[data-testid="stPageLink"] a {
+        background-color: #6b7280;
+        border-color: #4b5563;
+        color: white;
+    }
+    div[data-testid="stPageLink"] a:hover {
+        background-color: #4b5563;
+        border-color: #374151;
+        color: white;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 st.page_link("src/model_selection.py", label="Go to model selection")
 st.write("This page shows the dataset and exploratory analysis.")
 st.link_button("Open the GitHub repository", "https://github.com/Mikeyzgoat/2026AJ05257-ML-Assignment")

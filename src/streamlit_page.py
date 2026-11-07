@@ -70,6 +70,23 @@ def train_svm(X_train, y_train):
 
 def render_model_page(model_name: str) -> None:
     st.title(model_name)
+    st.markdown(
+        """
+        <style>
+        div.stButton > button[kind="primary"] {
+            background-color: #d32f2f;
+            border-color: #b71c1c;
+            color: white;
+        }
+        div.stButton > button[kind="primary"]:hover {
+            background-color: #b71c1c;
+            border-color: #8e0000;
+            color: white;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     st.subheader("Code used")
     st.code(ALGORITHM_CODE[model_name], language="python")
 
@@ -99,6 +116,11 @@ def render_model_page(model_name: str) -> None:
         st.caption(f"Using {'uploaded' if uploaded_file else 'repository'} CSV: {len(test_data):,} rows")
         st.write("First 10 rows loaded with `pd.read_csv(...).head(10)`:")
         st.dataframe(test_data.head(10), hide_index=True, use_container_width=True)
+
+        predict_clicked = st.button("Predict", type="primary")
+        if not predict_clicked:
+            st.info("Click Predict to run all five saved models on this test data.")
+            return
 
         X = test_data[FEATURE_COLUMNS]
         y = test_data["result"].astype(int)
