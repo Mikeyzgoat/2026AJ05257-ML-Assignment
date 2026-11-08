@@ -75,9 +75,3 @@ The app has two pages: a Home Page with the feature list, class balance, correla
 
 Live app link: [2026aj05257-ml-assignment-submission.streamlit.app](https://2026aj05257-ml-assignment-submission.streamlit.app/)
 
-## Assignment submission checklist
-
-- GitHub repository link: included above.
-- Live Streamlit app link: included above.
-- BITS Virtual Lab execution screenshot: must be captured by the student.
-- Final PDF: must contain the links, genuine screenshot, and this README content.
